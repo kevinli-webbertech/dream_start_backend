@@ -7,7 +7,7 @@ module.exports = {
       args: "start",
       env: {
         NODE_ENV: "production",
-        DATABASE_HOST: "cms.cc69hvvdc5ld.us-east-2.rds.amazonaws.com",
+        DATABASE_HOST: "cms-db.cc69hvvdc5ld.us-east-2.rds.amazonaws.com",
         DATABASE_PORT: "5432",
         DATABASE_NAME: "postgres",
         DATABASE_USERNAME: "postgres",

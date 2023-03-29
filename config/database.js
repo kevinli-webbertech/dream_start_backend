@@ -4,7 +4,7 @@ module.exports = ({ env }) => ({
     connection: {
       host: env(
         "DATABASE_HOST",
-        "cms.cc69hvvdc5ld.us-east-2.rds.amazonaws.com"
+        "cms-db.cc69hvvdc5ld.us-east-2.rds.amazonaws.com"
       ),
       port: env.int("DATABASE_PORT", 5432),
       database: env("DATABASE_NAME", "postgres"),
