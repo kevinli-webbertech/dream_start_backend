@@ -4,5 +4,7 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array("APP_KEYS"),
   },
-  url: env("PUBLIC_URL", "http://3.19.83.70:1337"),
+ //  url: env("PUBLIC_URL", "http://3.19.83.70:1337"),
+ url: env("PUBLIC_URL", "http://api.webbertech.com"),
+
 });
