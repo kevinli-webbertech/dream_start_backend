@@ -1,1 +1,1 @@
-ssh -i frontend.pem-dermx.pem ubuntu@webbertech.com
+ssh -i webbertech.pem ubuntu@webbertech.com
