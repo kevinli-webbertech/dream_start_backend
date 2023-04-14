@@ -53,19 +53,25 @@ Error response from daemon: This node is not a swarm manager. Use "docker swarm 
 ## .env [TODO]
 
 HOST=0.0.0.0
+
 PORT=1337
+
 APP_KEYS=FbXn2RrSRAidjQxcuU+D5Q==,792Rd3U2uFQaseM9pz0v+w==,0urKoiAzWg6XpwosGxRNXw==,dLIu4cFWzLH0OBKWJ/GEAw==
+
 API_TOKEN_SALT=SZgKo78KyfLQOlu8gOmfcQ==
+
 ADMIN_JWT_SECRET=XJsGWlO3O2hoWRL1bZq56Q==
+
 TRANSFER_TOKEN_SALT=zC2NNpTRpCzwSfLcRzhxEQ==
+
 JWT_SECRET=IrSwLKzW2uebXQs/A08avQ==
+
 # Database
 DATABASE_HOST=cms-db.cc69hvvdc5ld.us-east-2.rds.amazonaws.com
 DATABASE_PORT=5432
 DATABASE_NAME=postgres
 DATABASE_USERNAME=postgres
 DATABASE_PASSWORD=postgres
-
 
 # Deployment
 
