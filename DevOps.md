@@ -6,6 +6,13 @@ This documentation is based on EC2 solution.
 
 * Nginx
 
+Prepare EC with VIM and GIT. Set vim as the git editor.
+
+`git config --global core.editor "vim"`
+
+
+
+
 
 ## Inspecting currently running containers
 
