@@ -102,7 +102,9 @@ Scripts of the followings are from `history`
 
 ## Commonly used scripts [TODO]
 container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
+
 sudo docker container stop ${container_id}
+
 sudo docker build -t dream_ui_front:release
 
 
