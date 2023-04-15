@@ -6,6 +6,13 @@ This documentation is based on EC2 solution.
 
 * Nginx
 
+Prepare EC with VIM and GIT. Set vim as the git editor.
+
+`git config --global core.editor "vim"`
+
+
+
+
 
 ## Inspecting currently running containers
 
@@ -52,6 +59,7 @@ Error response from daemon: This node is not a swarm manager. Use "docker swarm 
 
 ## .env [TODO]
 
+```
 HOST=0.0.0.0
 PORT=1337
 APP_KEYS=FbXn2RrSRAidjQxcuU+D5Q==,792Rd3U2uFQaseM9pz0v+w==,0urKoiAzWg6XpwosGxRNXw==,dLIu4cFWzLH0OBKWJ/GEAw==
@@ -59,13 +67,17 @@ API_TOKEN_SALT=SZgKo78KyfLQOlu8gOmfcQ==
 ADMIN_JWT_SECRET=XJsGWlO3O2hoWRL1bZq56Q==
 TRANSFER_TOKEN_SALT=zC2NNpTRpCzwSfLcRzhxEQ==
 JWT_SECRET=IrSwLKzW2uebXQs/A08avQ==
+```
+
 # Database
+
+```
 DATABASE_HOST=cms-db.cc69hvvdc5ld.us-east-2.rds.amazonaws.com
 DATABASE_PORT=5432
 DATABASE_NAME=postgres
 DATABASE_USERNAME=postgres
 DATABASE_PASSWORD=postgres
-
+```
 
 # Deployment
 
@@ -102,7 +114,9 @@ Scripts of the followings are from `history`
 
 ## Commonly used scripts [TODO]
 container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
+
 sudo docker container stop ${container_id}
+
 sudo docker build -t dream_ui_front:release
 
 
