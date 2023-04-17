@@ -166,6 +166,14 @@ total 16
 drwxr-xr-x 1 root root 4096 Apr 17 18:08 .
 drwxr-xr-x 1 root root 4096 Mar  9 12:07 ..
 -rw-r--r-- 1 root root  299 Apr 17 18:08 custom_server.conf
+
+ubuntu@ip-172-31-20-5:~$ sudo docker exec -it 08e025 bash
+root@08e025adf207:/# ps -au|grep nginx
+root           1  0.0  0.0  56952  2052 pts/0    Ss+  Mar31   0:00 nginx: master process nginx -g daemon off;
+www-data    2896  0.0  0.0  57568  3828 pts/0    S+   Mar31   0:03 nginx: worker process
+www-data    2897  0.0  0.0  57568  3812 pts/0    S+   Mar31   0:03 nginx: worker process
+root        2969  0.0  0.0   3316  1480 pts/1    S+   19:00   0:00 grep --color=auto nginx
+
 ```
 
 Kill the nginx server, `nginx -s quit`
