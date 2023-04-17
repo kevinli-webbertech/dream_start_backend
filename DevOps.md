@@ -151,9 +151,27 @@ server {
 }
 ```
 
+Check configuration layout,
+
+```
+root@08e025adf207:/etc/nginx/sites-enabled# ls -al
+total 12
+drwxr-xr-x 1 root root 4096 Mar 31 20:34 .
+drwxr-xr-x 1 root root 4096 Mar  9 12:07 ..
+lrwxrwxrwx 1 root root   37 Mar 31 20:34 custom_server.conf -> ../sites-available/custom_server.conf
+root@08e025adf207:/etc/nginx/sites-enabled# cd ..
+root@08e025adf207:/etc/nginx# cd sites-available/
+root@08e025adf207:/etc/nginx/sites-available# ls -al
+total 16
+drwxr-xr-x 1 root root 4096 Apr 17 18:08 .
+drwxr-xr-x 1 root root 4096 Mar  9 12:07 ..
+-rw-r--r-- 1 root root  299 Apr 17 18:08 custom_server.conf
+```
+
 Kill the nginx server, `nginx -s quit`
 
 Restart the ngix server `nginx -s reload`
+
 
 ## Debugging
 
