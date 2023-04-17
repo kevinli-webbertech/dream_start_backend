@@ -10,10 +10,6 @@ Prepare EC with VIM and GIT. Set vim as the git editor.
 
 `git config --global core.editor "vim"`
 
-
-
-
-
 ## Inspecting currently running containers
 
 ```
@@ -155,20 +151,9 @@ server {
 }
 ```
 
-
 Kill the nginx server, `nginx -s quit`
+
 Restart the ngix server `nginx -s reload`
-
-```
-
-
-## Commonly used scripts [TODO]
-container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
-
-sudo docker container stop ${container_id}
-
-sudo docker build -t dream_ui_front:release
-
 
 ## Debugging
 
@@ -187,13 +172,24 @@ info  - Loaded env from /app/.env
 
 ```
 
-
 `docker exec -it container_id bash`
+
 
 After getting into it, do 
 
 `ps axuw|grep node`
 
+## Ref
+
+### Commonly used scripts [TODO]
+
+container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
+
+`sudo docker container stop ${container_id}`
+
+`sudo docker build -t dream_ui_front:release`
+
+`docker exec -it container_id bash`
 
 
 
