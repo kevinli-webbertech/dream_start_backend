@@ -112,6 +112,61 @@ Scripts of the followings are from `history`
   472  sudo docker logs 96db1924e17a0829d92b08ff93623d9268e04fe23d374a35fffa30e9647d4255
 ```
 
+## Nginx scripts [TODO]
+
+```
+boot  docker-entrypoint.d  etc                   lib   lib64  media   opt  root  sbin  sys  usr
+root@08e025adf207:/# history
+    1  clear
+    2  cd /etc/nginx
+    3  ls
+    4  cd sites-available/
+    5  ls
+    6  vim default 
+    7  cat default 
+    8  nginx -s reload
+    9  vim custom_server.conf
+   10  apt update 
+   11  apt install curl vim -y
+   12  vim custom_server.conf
+   13  ls
+   14  rm -rf default 
+   15  ln -s ./custom_server.conf /etc/nginx/sites-enabled/
+   16  cd ..
+   17  cd sites-enabled/
+   18  ls
+   19  rm -rf default 
+   20  nginx -t
+   21  cd ..
+   22  cd sites-available/
+   23  ls
+   24  cat custom_server.conf 
+   25  vim custom_server.conf 
+   26  ln -s ./custom_server.conf /etc/nginx/sites-enabled/
+   27  nginx -t
+   28  cat custom_server.conf 
+   29  cd ../sites-enabled/
+   30  rm custom_server.conf 
+   31  ls
+   32  ln -s ../sites-available/custom_server.conf 
+   33  ls
+   34  nginx -t
+   35  nginx -s reload
+   36  clear
+   37  exit
+   38  cd etc/nginx/
+   39  cat sites-enabled/
+   40  cat sites-enabled/custom_server.conf 
+   41  exit
+   42  ls
+   43  grep -R "webbertech.com" .
+   44  ls
+   45  vi docker-entrypoint.sh
+   46  ls
+   47  history
+```
+
+
 ## Commonly used scripts [TODO]
 container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
 
