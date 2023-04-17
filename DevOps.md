@@ -109,7 +109,7 @@ Scripts of the followings are from `history`
 ```
 
 
-## Nginx scripts [TODO: do this in a separate docker file]
+## Nginx Load Balancer Setup [TODO: do this in a separate docker file]
 
 ssh to the docker container of the nginx
 
