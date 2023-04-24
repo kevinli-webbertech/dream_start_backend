@@ -217,5 +217,17 @@ container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
 
 `docker exec -it container_id bash`
 
+## Free ssl configuration we are using certbot with nginx
 
+Step 1 : 
+Go inside the nginx container by using following command 
+
+`sudo docker ecec -it <nginx-container-id> bash `
+
+Step 2 : 
+Run following commands to apply free ssl 
+
+`apt update`
+`apt install certbot python3-certbot-nginx`
+`certbot --nginx -d Webbertech.com -d api.Webbertech.com`
 
