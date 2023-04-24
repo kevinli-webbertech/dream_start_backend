@@ -228,6 +228,8 @@ Step 2 :
 Run following commands to apply free ssl 
 
 `apt update`
+
 `apt install certbot python3-certbot-nginx`
+
 `certbot --nginx -d Webbertech.com -d api.Webbertech.com`
 
