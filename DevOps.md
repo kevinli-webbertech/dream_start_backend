@@ -222,7 +222,7 @@ container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
 Step 1 : 
 Go inside the nginx container by using following command 
 
-`sudo docker ecec -it <nginx-container-id> bash `
+`sudo docker exec -it <nginx-container-id> bash `
 
 Step 2 : 
 Run following commands to apply free ssl 
@@ -233,3 +233,14 @@ Run following commands to apply free ssl
 
 `certbot --nginx -d Webbertech.com -d api.Webbertech.com`
 
+Step 3: renew
+
+`$ sudo certbot renew --nginx`
+
+This command prompts us with a dialogue containing a few steps on the renewal process. LetsEncrypt only allows renewal of certificates that are within 30 days of expiry. Finally, let’s set up the auto-renew feature to avoid logging in to the server to manually update it. The auto-renew feature is run by a cron job. A cron file is automatically added during the installation of Certbot and we can find it in the /etc/cron.d/certbot directory. In case it’s not available, we need to create it. Let’s open the cron file with a text editor like nano and then add this content:
+
+```
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+```
+0 */12 * * * root certbot -q renew --nginx
