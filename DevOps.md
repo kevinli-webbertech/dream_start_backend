@@ -10,10 +10,6 @@ Prepare EC with VIM and GIT. Set vim as the git editor.
 
 `git config --global core.editor "vim"`
 
-
-
-
-
 ## Inspecting currently running containers
 
 ```
@@ -112,12 +108,77 @@ Scripts of the followings are from `history`
   472  sudo docker logs 96db1924e17a0829d92b08ff93623d9268e04fe23d374a35fffa30e9647d4255
 ```
 
-## Commonly used scripts [TODO]
-container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
 
-sudo docker container stop ${container_id}
+## Nginx Load Balancer Setup [TODO: do this in a separate docker file]
 
-sudo docker build -t dream_ui_front:release
+ssh to the docker container of the nginx
+
+```
+apt update 
+apt install curl vim -y
+vim custom_server.conf
+cd /etc/nginx
+cd sites-available/
+nginx -s reload
+vim custom_server.conf
+rm -rf default
+ln -s ./custom_server.conf /etc/nginx/sites-enabled/
+cd sites-enabled/
+rm -rf default 
+nginx -t
+cd sites-available/
+vim custom_server.conf 
+ln -s ./custom_server.conf /etc/nginx/sites-enabled/
+ln -s ../sites-available/custom_server.conf 
+ls
+```
+
+```
+server {
+     listen       80;
+     server_name  Webbertech.com;
+     location / {
+          proxy_pass "http://172.31.20.5:3000";
+     }
+}
+server {
+     listen       80;
+     server_name  api.Webbertech.com;
+
+     location / {
+          proxy_pass "http://172.31.20.5:1337";
+     }
+}
+```
+
+Check configuration layout,
+
+```
+root@08e025adf207:/etc/nginx/sites-enabled# ls -al
+total 12
+drwxr-xr-x 1 root root 4096 Mar 31 20:34 .
+drwxr-xr-x 1 root root 4096 Mar  9 12:07 ..
+lrwxrwxrwx 1 root root   37 Mar 31 20:34 custom_server.conf -> ../sites-available/custom_server.conf
+root@08e025adf207:/etc/nginx/sites-enabled# cd ..
+root@08e025adf207:/etc/nginx# cd sites-available/
+root@08e025adf207:/etc/nginx/sites-available# ls -al
+total 16
+drwxr-xr-x 1 root root 4096 Apr 17 18:08 .
+drwxr-xr-x 1 root root 4096 Mar  9 12:07 ..
+-rw-r--r-- 1 root root  299 Apr 17 18:08 custom_server.conf
+
+ubuntu@ip-172-31-20-5:~$ sudo docker exec -it 08e025 bash
+root@08e025adf207:/# ps -au|grep nginx
+root           1  0.0  0.0  56952  2052 pts/0    Ss+  Mar31   0:00 nginx: master process nginx -g daemon off;
+www-data    2896  0.0  0.0  57568  3828 pts/0    S+   Mar31   0:03 nginx: worker process
+www-data    2897  0.0  0.0  57568  3812 pts/0    S+   Mar31   0:03 nginx: worker process
+root        2969  0.0  0.0   3316  1480 pts/1    S+   19:00   0:00 grep --color=auto nginx
+
+```
+
+Kill the nginx server, `nginx -s quit`
+
+Restart the ngix server `nginx -s reload`
 
 
 ## Debugging
@@ -137,13 +198,49 @@ info  - Loaded env from /app/.env
 
 ```
 
-
 `docker exec -it container_id bash`
+
 
 After getting into it, do 
 
 `ps axuw|grep node`
 
+## Ref
 
+### Commonly used scripts [TODO]
 
+container_id = `docker container ls | grep dream_ui_front | awk '{print $1}'`
 
+`sudo docker container stop ${container_id}`
+
+`sudo docker build -t dream_ui_front:release`
+
+`docker exec -it container_id bash`
+
+## Free ssl configuration we are using certbot with nginx
+
+Step 1 : 
+Go inside the nginx container by using following command 
+
+`sudo docker exec -it <nginx-container-id> bash `
+
+Step 2 : 
+Run following commands to apply free ssl 
+
+`apt update`
+
+`apt install certbot python3-certbot-nginx`
+
+`certbot --nginx -d Webbertech.com -d api.Webbertech.com`
+
+Step 3: renew
+
+`$ sudo certbot renew --nginx`
+
+This command prompts us with a dialogue containing a few steps on the renewal process. LetsEncrypt only allows renewal of certificates that are within 30 days of expiry. Finally, let’s set up the auto-renew feature to avoid logging in to the server to manually update it. The auto-renew feature is run by a cron job. A cron file is automatically added during the installation of Certbot and we can find it in the /etc/cron.d/certbot directory. In case it’s not available, we need to create it. Let’s open the cron file with a text editor like nano and then add this content:
+
+```
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+```
+0 */12 * * * root certbot -q renew --nginx
